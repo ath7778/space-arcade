@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games - Space Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .games-container {
+            margin-left: 100px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: calc(100% - 100px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .games-carousel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex: 1;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        
+        .games-nav-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 150px;
+        }
+        
+        .mini-game-tile {
+            background: rgba(15, 18, 28, 0.8);
+            border: 2px solid #2a2a4a;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mini-game-tile:hover {
+            transform: scale(1.05);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 169, 255, 0.3);
+        }
+        
+        .game-label {
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .mini-game-content i {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+        }
+        
+        .nav-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-arrow i {
+            color: var(--light-text);
+            font-size: 1.2rem;
+        }
+        
+        .nav-arrow:hover {
+            background: rgba(0, 169, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .main-game-display {
+            flex: 0 0 400px;
+            height: 300px;
+            position: relative;
+            border: 3px solid #2a2a4a;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .main-game-display:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 169, 255, 0.3);
+        }
+        
+        .game-image-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .main-game-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .game-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 30, 0.8);
+            color: var(--white);
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .game-info-panel {
+            width: 200px;
+            background: rgba(15, 18, 28, 0.8);
+            border: 2px solid #2a2a4a;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-header {
+            background: rgba(0, 169, 255, 0.2);
+            color: var(--white);
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-content {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .info-content p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .play-game-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .play-game-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 169, 255, 0.3);
+        }
+        
+        .coming-soon {
+            position: relative;
+            opacity: 0.7;
+            cursor: default;
+        }
+        
+        .coming-soon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 30, 0.5);
+            border-radius: 10px;
+            pointer-events: none;
+        }
+        
+        .coming-soon .mini-game-content i {
+            color: rgba(0, 169, 255, 0.6);
+        }
+        
+        .coming-soon:hover {
+            transform: none;
+            border-color: #2a2a4a;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-container"></div>
+
+    <div id="main-content" class="main-content">
+        <header class="ps-header">
+            <div class="logo">
+                <i class="fas fa-rocket rocket-icon"></i>
+                <h1>Space <span>Arcade</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html"><i class="fas fa-home nav-icon"></i><span>Home</span></a></li>
+                    <li><a href="games.html" class="active"><i class="fas fa-gamepad nav-icon"></i><span>Games</span></a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle nav-icon"></i><span>About</span></a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog nav-icon"></i><span>Settings</span></a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <span id="user-display">Username</span>
+                <div class="avatar"><i class="fas fa-user-astronaut"></i></div>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+
+        <section id="games" class="games-container">
+            <video class="games-video-bg" autoplay muted loop playsinline>
+                <source src="images/215695_medium.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+            
+            <div class="games-header">
+                <h2 class="section-title">Games Library</h2>
+            </div>
+            
+            <div class="games-carousel-container">
+                <div class="games-nav-area left-games">
+                    <div class="mini-game-tile" data-game="asteroid-typer">
+                        <div class="game-label">Current</div>
+                        <div class="mini-game-content">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                    </div>
+                    <div class="mini-game-tile coming-soon">
+                        <div class="game-label">Coming Soon</div>
+                        <div class="mini-game-content">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="nav-arrow left-arrow">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                
+                <div class="main-game-display">
+                    <div class="game-image-container">
+                        <img src="images/asteroid-typer.jpg" alt="Asteroid Typer" class="main-game-image">
+                        <div class="game-title">Asteroid Typer</div>
+                    </div>
+                </div>
+                
+                <div class="game-info-panel">
+                    <div class="info-header">Game Info</div>
+                    <div class="info-content">
+                        <p>Test your typing skills in this space-themed typing game. Type the words to destroy incoming asteroids before they hit your spaceship!</p>
+                        <button class="play-game-btn" onclick="window.location.href='games/asteroid-typer/index.html'">Play Game</button>
+                    </div>
+                </div>
+                
+                <div class="nav-arrow right-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                
+                <div class="games-nav-area right-games">
+                    <div class="mini-game-tile coming-soon">
+                        <div class="game-label">Coming Soon</div>
+                        <div class="mini-game-content">
+                            <i class="fas fa-chess"></i>
+                        </div>
+                    </div>
+                    <div class="mini-game-tile coming-soon">
+                        <div class="game-label">Coming Soon</div>
+                        <div class="mini-game-content">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

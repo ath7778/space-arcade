@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Arcade - Web Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars-container"></div>
+    <div id="main-content" class="main-content">
+        <header class="ps-header">
+            <div class="logo">
+                <i class="fas fa-rocket rocket-icon"></i>
+                <h1>Space <span>Arcade</span></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html" class="active"><i class="fas fa-home nav-icon"></i><span>Home</span></a></li>
+                    <li><a href="games.html"><i class="fas fa-gamepad nav-icon"></i><span>Games</span></a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle nav-icon"></i><span>About</span></a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog nav-icon"></i><span>Settings</span></a></li>
+                </ul>
+            </nav>
+            <div class="user-profile">
+                <span id="user-display">Username</span>
+                <div class="avatar"><i class="fas fa-user-astronaut"></i></div>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </header>
+        <section class="hero-space">
+            <div class="hero-content">
+                <h2>Welcome to Space Arcade</h2>
+                <p>Explore immersive web games in our cosmic collection</p>
+                <a href="#games" class="btn btn-primary">Play Now</a>
+            </div>
+        </section>
+        <section class="welcome-section">
+            <div class="container">
+                <div class="welcome-content">
+                    <h2 class="section-title">Welcome to Space Arcade</h2>
+                    <div class="welcome-grid">
+                        <div class="welcome-card" onclick="window.location.href='games.html'">
+                            <div class="card-icon">
+                            </div>
+                            <h3>Games Library</h3>
+                            <p>Explore our collection of space-themed games</p>
+                        </div>
+                        <div class="welcome-card" onclick="window.location.href='about.html'">
+                        </div>
+                        <div class="welcome-card" onclick="window.location.href='settings.html'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

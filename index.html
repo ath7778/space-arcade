@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Arcade - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0070cc;
+            --neon-blue: #00a9ff;
+            --dark-bg: #0a0a1e;
+            --deep-space: #050520;
+            --light-text: #e0e0ff;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, var(--deep-space), var(--dark-bg));
+            color: var(--light-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(2px 2px at 40px 60px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 20px 50px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 30px 100px, rgba(255,255,255,0.9), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 60px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 110px 90px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 120px, rgba(255,255,255,0.9), rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+        
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .login-card {
+            background: rgba(10, 15, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+        
+        .login-logo {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .rocket-icon {
+            font-size: 3rem;
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(0, 169, 255, 0.7));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .login-logo h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 169, 255, 0.5);
+        }
+        
+        .login-logo h1 span {
+            color: var(--neon-blue);
+        }
+        
+        .login-form h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .login-form p {
+            margin-bottom: 25px;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .username-input {
+            width: 100%;
+            background: rgba(20, 30, 50, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--white);
+            font-family: 'Exo 2', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .username-input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 169, 255, 0.3);
+        }
+        
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'Exo 2', sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 169, 255, 0.3);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 169, 255, 0.4);
+        }
+        
+        .login-btn:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-bg"></div>
+    
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-logo">
+                <i class="fas fa-rocket rocket-icon"></i>
+                <h1>Space <span>Arcade</span></h1>
+            </div>
+            
+            <div class="login-form">
+                <h2>Welcome, Player</h2>
+                <p>Enter your username to continue</p>
+                
+                <div class="input-group">
+                    <input type="text" id="username-input" class="username-input" placeholder="Username" required>
+                </div>
+                
+                <button id="login-button" class="login-btn">Enter Space Arcade</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const usernameInput = document.getElementById('username-input');
+            const loginButton = document.getElementById('login-button');
+            
+            setTimeout(() => {
+                usernameInput.focus();
+            }, 500);
+            
+            function loginUser() {
+                const username = usernameInput.value.trim();
+                
+                if (username) {
+                    localStorage.setItem('space_arcade_username', username);
+                    
+                    loginButton.textContent = 'Launching...';
+                    loginButton.style.background = '#00a9ff';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 800);
+                }
+            }
+            
+            loginButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                loginUser();
+            });
+            
+            usernameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    loginUser();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
