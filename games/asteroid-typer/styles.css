@@ -1,0 +1,296 @@
+:root {
+    --game-primary: #00a9ff;
+    --game-secondary: #0070cc;
+    --game-accent: #ff5a5f;
+    --game-bg: #050520;
+    --game-dark: #0a0a1e;
+    --game-light: #e0e0ff;
+    --game-white: #ffffff;
+    --game-overlay: rgba(10, 10, 30, 0.8);
+}
+
+.game-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Exo 2', sans-serif;
+    color: var(--game-light);
+    background: linear-gradient(135deg, var(--game-bg), var(--game-dark));
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-info h1 {
+    margin: 0;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+    color: var(--game-white);
+    text-shadow: 0 0 10px rgba(0, 169, 255, 0.7);
+}
+
+.game-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.stat {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.game-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(5, 5, 32, 0.5);
+    border: 1px solid rgba(0, 169, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+#gameCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--game-overlay);
+    z-index: 10;
+}
+
+.overlay-content {
+    background: rgba(15, 18, 28, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    border: 1px solid rgba(0, 169, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 169, 255, 0.3);
+}
+
+.overlay-content h2 {
+    color: var(--game-primary);
+    font-family: 'Rajdhani', sans-serif;
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.overlay-content p {
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.game-button {
+    background: linear-gradient(135deg, var(--game-secondary), var(--game-primary));
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Exo 2', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.game-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 169, 255, 0.4);
+}
+
+.game-button:active {
+    transform: translateY(1px);
+}
+
+.typing-area {
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.typing-bar {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    padding: 5px;
+    display: flex;
+}
+
+#typingInput {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    color: var(--game-white);
+    font-size: 1.1rem;
+    font-family: 'Exo 2', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#typingInput:focus {
+    box-shadow: 0 0 0 2px var(--game-primary);
+}
+
+#typingInput::placeholder {
+    color: rgba(224, 224, 255, 0.5);
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.control-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--game-light);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.control-btn:hover {
+    background: rgba(0, 169, 255, 0.2);
+    border-color: var(--game-primary);
+}
+
+.control-btn i {
+    margin-right: 5px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-content {
+    background: rgba(15, 18, 28, 0.95);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    position: relative;
+    border: 1px solid rgba(0, 169, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--game-primary);
+}
+
+.modal-content h2 {
+    color: var(--game-primary);
+    margin-top: 0;
+}
+
+.modal-content h3 {
+    color: var(--game-white);
+}
+
+.modal-content ul {
+    text-align: left;
+    line-height: 1.8;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+#levelUpScreen {
+    animation: fadeInOut 2s forwards;
+}
+
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .game-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .game-controls {
+        flex-wrap: wrap;
+    }
+}

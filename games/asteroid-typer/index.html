@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Typer - Space Arcade</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <!-- Game UI -->
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-info">
+                <h1>Asteroid Typer</h1>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">Score:</span>
+                        <span id="score">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Level:</span>
+                        <span id="level">1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Lives:</span>
+                        <span id="lives">3</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Game Canvas -->
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- Game Overlay Elements -->
+            <div id="gameStartScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Asteroid Typer</h2>
+                    <p>Type the words on the asteroids to destroy them before they hit your ship!</p>
+                    <button id="startGameBtn" class="game-button">Start Game</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Game Over</h2>
+                    <p>Your final score: <span id="finalScore">0</span></p>
+                    <button id="restartGameBtn" class="game-button">Play Again</button>
+                </div>
+            </div>
+            
+            <div id="levelUpScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Level Up!</h2>
+                    <p>Get ready for Level <span id="newLevel">2</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="typing-area">
+            <div class="typing-bar">
+                <input type="text" id="typingInput" placeholder="Type here to shoot..." autocomplete="off" disabled>
+            </div>
+        </div>
+        
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button id="pauseBtn" class="control-btn">
+                <i class="fas fa-pause"></i> Pause
+            </button>
+            <button id="muteBtn" class="control-btn">
+                <i class="fas fa-volume-up"></i> Sound
+            </button>
+            <button id="helpBtn" class="control-btn">
+                <i class="fas fa-question-circle"></i> Help
+            </button>
+        </div>
+    </div>
+    
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>How to Play</h2>
+            <ul>
+                <li>Type the words on the asteroids to destroy them</li>
+                <li>Each successful hit earns you points</li>
+                <li>If an asteroid hits your ship, you lose a life</li>
+                <li>Game ends when you run out of lives</li>
+                <li>Speed increases with each level</li>
+            </ul>
+            <h3>Controls</h3>
+            <ul>
+                <li><strong>Type words</strong> in the input field to target asteroids</li>
+                <li>Press <strong>ESC</strong> to pause the game</li>
+                <li>Press <strong>Enter</strong> to confirm your input</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
