@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Surfing - Space Arcade</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-info">
+                <h1 class="game-title">Solar Surfing</h1>
+                <div class="game-controls">
+                    <button id="pauseBtn" class="control-btn"><i class="fas fa-pause"></i> Pause</button>
+                    <button id="muteBtn" class="control-btn"><i class="fas fa-volume-up"></i> Sound</button>
+                    <button id="helpBtn" class="control-btn"><i class="fas fa-question-circle"></i> Help</button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Game Area -->
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- Game UI Elements -->
+            <div class="game-ui">
+                <div class="game-stats">
+                    <div class="stat-group">
+                        <span class="stat-label">Score:</span>
+                        <span id="score" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-group">
+                        <span class="stat-label">Tricks:</span>
+                        <span id="tricks" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-group">
+                        <span class="stat-label">Heat Level:</span>
+                        <div class="heat-meter">
+                            <div id="heatFill" class="heat-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-notifications">
+                    <div id="trickAlert" class="notification hidden">Trick Combo x3!</div>
+                    <div id="solarFlareAlert" class="notification warning hidden">Solar Flare Incoming!</div>
+                </div>
+                
+                <div class="trick-display">
+                    <div id="trickName" class="trick-name hidden">360° Flip</div>
+                    <div id="trickPoints" class="trick-points hidden">+150</div>
+                </div>
+            </div>
+            
+            <!-- Game Start Screen -->
+            <div id="gameStartScreen" class="game-screen">
+                <h2>Solar Surfing</h2>
+                <p>Ride the solar flares across the sun's surface, performing tricks for points while avoiding solar storms.</p>
+                <div class="controls-guide">
+                    <div class="control-item">
+                        <div class="key-group">
+                            <div class="key">←</div>
+                            <div class="key">→</div>
+                        </div>
+                        <span>Move Left/Right</span>
+                    </div>
+                    <div class="control-item">
+                        <div class="key-group">
+                            <div class="key">↑</div>
+                            <div class="key">↓</div>
+                        </div>
+                        <span>Jump/Drop</span>
+                    </div>
+                    <div class="control-item">
+                        <div class="key">Space</div>
+                        <span>Perform Trick</span>
+                    </div>
+                </div>
+                <button id="startGameBtn" class="start-btn">Start Surfing</button>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="game-screen hidden">
+                <h2>Wipeout!</h2>
+                <p>Your board overheated and you've been thrown into space!</p>
+                <div class="score-display">
+                    <div class="score-item">
+                        <span class="score-label">Total Score:</span>
+                        <span id="finalScore" class="score-value">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Tricks Performed:</span>
+                        <span id="finalTricks" class="score-value">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Best Combo:</span>
+                        <span id="bestCombo" class="score-value">0</span>
+                    </div>
+                </div>
+                <button id="restartGameBtn" class="start-btn">Ride Again</button>
+            </div>
+            
+            <!-- Level Up Screen -->
+            <div id="levelUpScreen" class="game-screen hidden">
+                <h2>Stellar Boost!</h2>
+                <div class="sun-pulse"></div>
+            </div>
+        </div>
+        
+        <!-- Help Modal -->
+        <div id="helpModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>How to Play</h2>
+                <div class="help-instructions">
+                    <p>Surf across the sun's surface on your quantum board, performing tricks and avoiding danger.</p>
+                    <ul>
+                        <li><strong>Left/Right Arrow Keys:</strong> Move your surfer</li>
+                        <li><strong>Up Arrow:</strong> Jump off a solar flare</li>
+                        <li><strong>Down Arrow:</strong> Drop down or dive</li>
+                        <li><strong>Space Bar:</strong> Perform aerial tricks (only when airborne)</li>
+                        <li><strong>Avoid:</strong> Solar storms and excessive heat</li>
+                    </ul>
+                    <p class="tip"><strong>Pro Tip:</strong> Linking multiple tricks creates combo multipliers!</p>
+                    <p class="warning"><strong>Warning:</strong> Staying on a flare too long will overheat your board!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

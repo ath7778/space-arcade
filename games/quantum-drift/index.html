@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Drift - Space Arcade</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-info">
+                <h1 class="game-title">Quantum Drift</h1>
+                <div class="game-controls">
+                    <button id="pauseBtn" class="control-btn"><i class="fas fa-pause"></i> Pause</button>
+                    <button id="muteBtn" class="control-btn"><i class="fas fa-volume-up"></i> Sound</button>
+                    <button id="helpBtn" class="control-btn"><i class="fas fa-question-circle"></i> Help</button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Game Area -->
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- Game UI Elements -->
+            <div class="game-ui">
+                <div class="game-stats">
+                    <div class="stat-group">
+                        <span class="stat-label">Distance:</span>
+                        <span id="distance" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-group">
+                        <span class="stat-label">Speed:</span>
+                        <span id="speed" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-group">
+                        <span class="stat-label">Boost:</span>
+                        <div class="boost-meter">
+                            <div id="boostFill" class="boost-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-notifications">
+                    <div id="wormholeAlert" class="notification hidden">Wormhole Approaching!</div>
+                </div>
+            </div>
+            
+            <!-- Game Start Screen -->
+            <div id="gameStartScreen" class="game-screen">
+                <h2>Quantum Drift</h2>
+                <p>Navigate your ship through wormholes and quantum tunnels at breakneck speeds.</p>
+                <div class="controls-guide">
+                    <div class="control-item">
+                        <div class="key-group">
+                            <div class="key">←</div>
+                            <div class="key">→</div>
+                        </div>
+                        <span>Move Left/Right</span>
+                    </div>
+                    <div class="control-item">
+                        <div class="key">Space</div>
+                        <span>Boost</span>
+                    </div>
+                </div>
+                <button id="startGameBtn" class="start-btn">Start Racing</button>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div id="gameOverScreen" class="game-screen hidden">
+                <h2>Quantum Collapse</h2>
+                <p>Your ship has been lost to the quantum void.</p>
+                <div class="score-display">
+                    <div class="score-item">
+                        <span class="score-label">Distance Traveled:</span>
+                        <span id="finalDistance" class="score-value">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Top Speed:</span>
+                        <span id="topSpeed" class="score-value">0</span>
+                    </div>
+                </div>
+                <button id="restartGameBtn" class="start-btn">Restart</button>
+            </div>
+            
+            <!-- Level Up Screen -->
+            <div id="wormholeScreen" class="game-screen hidden">
+                <h2>Wormhole Entered!</h2>
+                <div class="wormhole-effect"></div>
+            </div>
+        </div>
+        
+        <!-- Help Modal -->
+        <div id="helpModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>How to Play</h2>
+                <div class="help-instructions">
+                    <p>Navigate your quantum ship through a procedurally generated wormhole tunnel.</p>
+                    <ul>
+                        <li><strong>Left/Right Arrow Keys:</strong> Steer your ship</li>
+                        <li><strong>Space:</strong> Activate quantum boost</li>
+                        <li><strong>Avoid:</strong> Tunnel walls and quantum anomalies</li>
+                        <li><strong>Collect:</strong> Energy particles to refill your boost meter</li>
+                    </ul>
+                    <p>The further you travel, the faster the tunnel becomes and the more points you earn!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
