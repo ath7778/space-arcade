@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravity Puzzler - Space Arcade</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+
+    <div class="game-container">
+
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-info">
+                <h1>Gravity Puzzler</h1>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">Level:</span>
+                        <span id="level">1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Moves:</span>
+                        <span id="moves">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Time:</span>
+                        <span id="time">00:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="restartBtn" class="game-button small">
+                    <i class="fas fa-redo"></i> Restart
+                </button>
+                <button id="helpBtn" class="game-button small">
+                    <i class="fas fa-question-circle"></i> Help
+                </button>
+                <button id="pauseBtn" class="game-button small">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+                <button id="muteBtn" class="game-button small">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+            </div>
+        </header>
+        
+
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+
+            <div class="controls">
+                <div class="gravity-controls">
+                    <button id="gravityUp" class="gravity-btn">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <button id="gravityRight" class="gravity-btn">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button id="gravityDown" class="gravity-btn">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                    <button id="gravityLeft" class="gravity-btn">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+            
+
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Gravity Puzzler</h2>
+                    <p>Navigate through space puzzles by manipulating gravity direction. Guide your ship through obstacles, avoid black holes, and find the exit portal!</p>
+                    <button id="startBtn" class="game-button">Start Game</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Game Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <ul>
+                        <li>Change gravity direction using the arrow buttons</li>
+                        <li>Guide the spaceship to the wormhole exit</li>
+                        <li>Avoid obstacles and black holes</li>
+                        <li>Collect energy orbs for bonus points</li>
+                        <li>Complete levels in fewer moves for higher scores</li>
+                    </ul>
+                    <button id="closeHelpBtn" class="game-button">Close</button>
+                </div>
+            </div>
+            
+            <div id="levelCompleteScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Level Complete!</h2>
+                    <div class="level-stats">
+                        <p>Moves: <span id="levelMoves">0</span></p>
+                        <p>Time: <span id="levelTime">00:00</span></p>
+                        <p>Bonus: <span id="levelBonus">0</span></p>
+                    </div>
+                    <button id="nextLevelBtn" class="game-button">Next Level</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Game Over</h2>
+                    <div class="final-stats">
+                        <p>Levels Completed: <span id="finalLevels">0</span></p>
+                        <p>Total Moves: <span id="finalMoves">0</span></p>
+                        <p>Total Time: <span id="finalTime">00:00</span></p>
+                    </div>
+                    <button id="playAgainBtn" class="game-button">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
