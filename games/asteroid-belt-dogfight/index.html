@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Belt Dogfight - Space Arcade</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <!-- Game UI -->
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-info">
+                <h1>Asteroid Belt Dogfight</h1>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">Score:</span>
+                        <span id="score">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Wave:</span>
+                        <span id="wave">1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Health:</span>
+                        <span id="health">100</span>%
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Ammo:</span>
+                        <span id="ammo">50</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Game Canvas -->
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- Game Overlay Elements -->
+            <div id="gameStartScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Asteroid Belt Dogfight</h2>
+                    <p>Engage in intense space combat while navigating through dense asteroid fields. Take down enemy fighters and avoid collisions!</p>
+                    <button id="startGameBtn" class="game-button">Start Mission</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Failed</h2>
+                    <p>Your final score: <span id="finalScore">0</span></p>
+                    <p>Enemies destroyed: <span id="enemiesDestroyed">0</span></p>
+                    <button id="restartGameBtn" class="game-button">Retry Mission</button>
+                </div>
+            </div>
+            
+            <div id="levelCompleteScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Wave Completed!</h2>
+                    <p>Get ready for Wave <span id="newWave">2</span></p>
+                    <p>Enemy reinforcements incoming...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Weapon Controls -->
+        <div class="weapon-controls">
+            <div class="weapon-selector">
+                <div class="weapon active" data-weapon="laser">
+                    <i class="fas fa-bolt"></i>
+                    <span>Laser</span>
+                </div>
+                <div class="weapon" data-weapon="missile">
+                    <i class="fas fa-rocket"></i>
+                    <span>Missile</span>
+                </div>
+                <div class="weapon" data-weapon="shield">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Shield</span>
+                </div>
+            </div>
+            <div class="energy-bar">
+                <div class="energy-fill"></div>
+            </div>
+        </div>
+        
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button id="pauseBtn" class="control-btn">
+                <i class="fas fa-pause"></i> Pause
+            </button>
+            <button id="muteBtn" class="control-btn">
+                <i class="fas fa-volume-up"></i> Sound
+            </button>
+            <button id="helpBtn" class="control-btn">
+                <i class="fas fa-question-circle"></i> Help
+            </button>
+        </div>
+    </div>
+    
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>How to Play Asteroid Belt Dogfight</h2>
+            <ul>
+                <li>Use WASD or arrow keys to control your spacecraft</li>
+                <li>Left-click or Space to fire your selected weapon</li>
+                <li>Numbers 1, 2, 3 to switch between weapons</li>
+                <li>Destroy enemy fighters to earn points</li>
+                <li>Avoid asteroids and enemy fire</li>
+                <li>Collect power-ups to recharge ammo and health</li>
+            </ul>
+            <h3>Weapons</h3>
+            <ul>
+                <li><strong>Laser (1)</strong>: Rapid fire, low damage</li>
+                <li><strong>Missile (2)</strong>: Slow fire rate, high damage, area effect</li>
+                <li><strong>Shield (3)</strong>: Temporary invulnerability, consumes energy</li>
+            </ul>
+            <h3>Controls</h3>
+            <ul>
+                <li><strong>W/Up Arrow</strong>: Thrust forward</li>
+                <li><strong>A/Left Arrow</strong>: Rotate left</li>
+                <li><strong>D/Right Arrow</strong>: Rotate right</li>
+                <li><strong>S/Down Arrow</strong>: Brake</li>
+                <li><strong>Space/Left Click</strong>: Fire weapon</li>
+                <li><strong>ESC</strong>: Pause game</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

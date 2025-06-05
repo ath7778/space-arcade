@@ -1,0 +1,340 @@
+/* Deep Space Explorer - Game Styles */
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #05051a 0%, #0d0d35 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: rgba(10, 12, 28, 0.8);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(78, 115, 223, 0.3);
+    z-index: 10;
+}
+
+.back-button {
+    padding: 8px 15px;
+    background: rgba(0, 112, 204, 0.2);
+    border-radius: 20px;
+    color: #e0e0ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.back-button:hover {
+    background: rgba(0, 169, 255, 0.3);
+    transform: translateX(-5px);
+}
+
+.game-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.game-info h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba(0, 169, 255, 0.5);
+}
+
+.game-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+}
+
+.stat-label {
+    color: #a0a0ff;
+}
+
+.game-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 5, 30, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.overlay-content {
+    background: rgba(15, 20, 40, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    max-width: 500px;
+    border: 1px solid rgba(0, 169, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 112, 204, 0.5);
+    animation: pulse 3s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 30px rgba(0, 112, 204, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 50px rgba(0, 169, 255, 0.7);
+    }
+}
+
+.overlay-content h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 169, 255, 0.5);
+}
+
+.overlay-content p {
+    color: #e0e0ff;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.game-button {
+    background: linear-gradient(135deg, #0070cc, #00a9ff);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.game-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 169, 255, 0.3);
+}
+
+.control-area {
+    padding: 15px;
+    background: rgba(10, 12, 28, 0.7);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(78, 115, 223, 0.3);
+}
+
+.controls-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-group {
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    background: rgba(15, 20, 40, 0.8);
+    border: 1px solid rgba(0, 169, 255, 0.3);
+    color: #e0e0ff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-btn:hover:not(:disabled) {
+    background: rgba(0, 112, 204, 0.3);
+    border-color: rgba(0, 169, 255, 0.5);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.scanner-display {
+    width: 150px;
+    height: 70px;
+    background: rgba(5, 5, 15, 0.7);
+    border: 1px solid rgba(0, 169, 255, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.scanner-screen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: linear-gradient(180deg, rgba(0, 20, 40, 0.3), rgba(0, 60, 100, 0.1));
+}
+
+.scanner-line {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: rgba(0, 169, 255, 0.7);
+    top: 50%;
+    animation: scan 2s infinite;
+    box-shadow: 0 0 10px rgba(0, 169, 255, 0.8);
+}
+
+@keyframes scan {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: 100%;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(5, 5, 15, 0.8);
+    border-top: 1px solid rgba(78, 115, 223, 0.3);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 5, 30, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: rgba(15, 20, 40, 0.9);
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    border: 1px solid rgba(0, 169, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 112, 204, 0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #e0e0ff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 169, 255, 0.8);
+}
+
+.modal-content h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.modal-content h3 {
+    font-size: 1.3rem;
+    margin: 20px 0 10px;
+    color: #a0a0ff;
+}
+
+.modal-content ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.modal-content li {
+    margin-bottom: 8px;
+    color: #e0e0ff;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .game-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .game-info {
+        align-items: flex-start;
+        width: 100%;
+    }
+    
+    .game-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .controls-panel {
+        flex-direction: column;
+    }
+    
+    .control-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .scanner-display {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

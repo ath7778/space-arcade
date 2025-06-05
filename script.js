@@ -1,49 +1,47 @@
-/**
- * Space Arcade - Main JavaScript
- */
+
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Local Storage Keys
+
     const USERNAME_KEY = 'space_arcade_username';
     const THEME_KEY = 'space_arcade_theme';
     
-    // Initialize stars background
+
     initStarsBackground();
     
-    // Initialize page-specific effects
+
     initPageSpecificEffects();
     
-    // Initialize PS5-style navigation
+
     initPS5Navigation();
     
-    // Check if user has logged in before and handle current page URL
+
     const savedUsername = localStorage.getItem(USERNAME_KEY);
     const currentPath = window.location.pathname;
     const userDisplayEl = document.getElementById('user-display');
     
-    // For home.html, games.html, about.html, settings.html pages
+
     if (userDisplayEl && savedUsername) {
         userDisplayEl.textContent = savedUsername;
     }
     
-    // Apply any saved theme to any page
+
     const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
     document.body.setAttribute('data-theme', savedTheme);
     
-    // If user is not logged in but trying to access protected pages
+
     if (!savedUsername && !currentPath.includes('index.html') && 
         (currentPath.includes('home.html') || 
          currentPath.includes('games.html') || 
          currentPath.includes('about.html') || 
          currentPath.includes('settings.html'))) {
-        // Redirect to login page
+    
         window.location.href = 'index.html';
     }
     
-    // Initialize header scroll effect
+
     initHeaderScrollEffect();
     
-    // Username Form Submission
+
     const usernameForm = document.getElementById('usernameForm');
     if (usernameForm) {
         usernameForm.addEventListener('submit', function(e) {
@@ -52,21 +50,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const username = usernameInput.value.trim();
             
             if (username) {
-                // Save username to local storage
+            
                 localStorage.setItem(USERNAME_KEY, username);
                 
-                // Add login animation
+            
                 addLoginEffect();
                 
-                // Redirect to home.html instead of showing/hiding content
+            
                 setTimeout(() => {
                     window.location.href = 'home.html';
-                }, 800); // Wait for animation to complete
+                }, 800); 
             }
         });
     }
     
-    // Mobile Menu Toggle
+
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
     
@@ -77,54 +75,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Horizontal Scrolling for Games
+
     const scrollContainer = document.querySelector('.games-row');
     const leftArrow = document.querySelector('.scroll-arrow.left');
     const rightArrow = document.querySelector('.scroll-arrow.right');
     
     if (scrollContainer && leftArrow && rightArrow) {
-        // Scroll Left
+    
         leftArrow.addEventListener('click', function() {
             scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
         });
         
-        // Scroll Right
+    
         rightArrow.addEventListener('click', function() {
             scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
         });
         
-        // Hide arrows if no scrolling is needed
+    
         checkScrollArrows();
         
-        // Update arrow visibility when resizing
+    
         window.addEventListener('resize', checkScrollArrows);
         
         function checkScrollArrows() {
-            // Hide both arrows initially
+        
             leftArrow.style.opacity = '0.3';
             rightArrow.style.opacity = '0.3';
             
-            // Check if scrolling is possible
+        
             if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
                 rightArrow.style.opacity = '1';
                 
-                // Add scroll event to update arrow visibility
+            
                 scrollContainer.addEventListener('scroll', updateArrowVisibility);
                 updateArrowVisibility();
             }
         }
         
         function updateArrowVisibility() {
-            // Show/hide left arrow based on scroll position
+        
             leftArrow.style.opacity = scrollContainer.scrollLeft > 0 ? '1' : '0.3';
             
-            // Show/hide right arrow based on whether we can scroll further right
+        
             const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
             rightArrow.style.opacity = scrollContainer.scrollLeft < maxScrollLeft - 10 ? '1' : '0.3';
         }
     }
     
-    // Smooth scrolling for navigation links
+
     const navLinks = document.querySelectorAll('nav a, .hero-content a');
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
@@ -136,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (targetSection) {
                     targetSection.scrollIntoView({ behavior: 'smooth' });
                     
-                    // Close mobile menu if open
+                
                     if (nav.classList.contains('active')) {
                         nav.classList.remove('active');
                         menuToggle.classList.remove('active');
@@ -146,13 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Settings functionality
+
     const themeButtons = document.querySelectorAll('.theme-btn');
     const changeUsernameForm = document.querySelector('#change-username');
     
-    // Theme toggling
+
     if (themeButtons.length) {
-        // Get saved theme
+    
         const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
         setTheme(savedTheme);
         
@@ -162,19 +160,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTheme(theme);
                 localStorage.setItem(THEME_KEY, theme);
                 
-                // Update button active state
+            
                 themeButtons.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
             });
             
-            // Set initial active state
+        
             if (btn.getAttribute('data-theme') === savedTheme) {
                 btn.classList.add('active');
             }
         });
     }
     
-    // Change username
+
     if (changeUsernameForm) {
         const updateBtn = changeUsernameForm.nextElementSibling;
         if (updateBtn) {
@@ -184,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     localStorage.setItem(USERNAME_KEY, newUsername);
                     document.getElementById('user-display').textContent = newUsername;
                     
-                    // Show success message
+                
                     showSettingsMessage('Username updated successfully!', 'success');
                     changeUsernameForm.value = '';
                 } else {
@@ -195,19 +193,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// This function is no longer needed since we now redirect to home.html
-// Kept as a comment for reference
-// function showMainContent() {
-//     document.getElementById('login-screen').classList.add('hidden');
-//     document.getElementById('main-content').classList.remove('hidden');
-// }
-
-// Add a special effect when logging in
 function addLoginEffect() {
     const content = document.getElementById('main-content');
     content.style.animation = 'fadeIn 1s ease-out';
     
-    // Add the animation keyframes if not already present
     const styleSheet = document.styleSheets[0];
     const fadeInRule = `
         @keyframes fadeIn {
@@ -223,7 +212,7 @@ function addLoginEffect() {
     }
 }
 
-// Set theme (light or dark)
+
 function setTheme(theme) {
     const root = document.documentElement;
     
@@ -249,7 +238,7 @@ function setTheme(theme) {
     }
 }
 
-// Show message in settings section
+
 function showSettingsMessage(message, type) {
     const existingMsg = document.querySelector('.settings-message');
     if (existingMsg) {
@@ -327,7 +316,7 @@ function initPageSpecificEffects() {
     }
 }
 
-// Initialize About page effects
+
 function initAboutPageEffects() {
     // Animated stars
     const animatedStars = document.querySelector('.about-unified-section .animated-stars');
@@ -342,7 +331,7 @@ function initAboutPageEffects() {
     }
 }
 
-// Initialize Games page effects
+
 function initGamesPageEffects() {
     // Animated stars
     const animatedStars = document.querySelector('.games-unified-section .animated-stars');
@@ -351,7 +340,7 @@ function initGamesPageEffects() {
     }
 }
 
-// Initialize Settings page effects
+
 function initSettingsPageEffects() {
     // Animated stars
     const animatedStars = document.querySelector('.settings-unified-section .animated-stars');
@@ -382,7 +371,7 @@ function initSettingsPageEffects() {
     }
 }
 
-// Create animated stars for background
+
 function createAnimatedStars(container, count) {
     if (!container) return;
     
@@ -410,7 +399,7 @@ function createAnimatedStars(container, count) {
     }
 }
 
-// Create orbital rings for about section
+
 function createOrbitalRings(container) {
     if (!container) return;
     
@@ -424,7 +413,7 @@ function createOrbitalRings(container) {
     }
 }
 
-// Initialize PS5-style navigation effects
+
 function initPS5Navigation() {
     // Add the PS5-style active navigation indicators
     const navLinks = document.querySelectorAll('nav ul li a');
@@ -456,11 +445,10 @@ function initPS5Navigation() {
         });
     });
     
-    // Initialize video background for games page if it exists
     initVideoBackground();
 }
 
-// Initialize video background for games page
+
 function initVideoBackground() {
     const videoElement = document.querySelector('.games-video-bg');
     if (!videoElement) return;
@@ -514,14 +502,13 @@ function initHeaderScrollEffect() {
     // Add 3D tilt effect to game tiles and welcome cards
     initTiltEffect();
     
-    // Initialize theme toggle buttons
     initThemeToggle();
     
     // Initialize horizontal scroll for games section
     initHorizontalScroll();
 }
 
-// Initialize 3D tilt effect
+
 function initTiltEffect() {
     const tiltElements = document.querySelectorAll('.welcome-card, .game-tile:not(.empty-tile)');
     
@@ -554,7 +541,7 @@ function initTiltEffect() {
     });
 }
 
-// Initialize theme toggle
+
 function initThemeToggle() {
     const themeButtons = document.querySelectorAll('.theme-btn');
     const savedTheme = localStorage.getItem('space_arcade_theme') || 'dark';
@@ -579,7 +566,7 @@ function initThemeToggle() {
     });
 }
 
-// Initialize horizontal scrolling for games section
+
 function initHorizontalScroll() {
     const leftArrow = document.querySelector('.scroll-arrow.left');
     const rightArrow = document.querySelector('.scroll-arrow.right');
@@ -596,7 +583,7 @@ function initHorizontalScroll() {
     }
 }
 
-// Initialize stars background effect
+
 function initStarsBackgroundEffect() {
     const starsContainer = document.querySelector('.stars-container');
     if (!starsContainer) return;
@@ -614,7 +601,7 @@ function initStarsBackgroundEffect() {
     }, 4000);
 }
 
-// Create a shooting star element
+
 function createShootingStar(container) {
     const star = document.createElement('div');
     star.className = 'shooting-star';

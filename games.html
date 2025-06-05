@@ -8,217 +8,348 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+
         .games-container {
-            margin-left: 100px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            width: calc(100% - 100px);
+            padding: 40px 5%;
+            min-height: calc(100vh - 80px);
             position: relative;
             overflow: hidden;
         }
         
-        .games-carousel-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            flex: 1;
-            margin-top: 20px;
-            gap: 10px;
-        }
-        
-        .games-nav-area {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 150px;
-        }
-        
-        .mini-game-tile {
-            background: rgba(15, 18, 28, 0.8);
-            border: 2px solid #2a2a4a;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .mini-game-tile:hover {
-            transform: scale(1.05);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 169, 255, 0.3);
-        }
-        
-        .game-label {
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-            color: var(--light-text);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .mini-game-content i {
-            font-size: 2.5rem;
-            color: var(--neon-blue);
-        }
-        
-        .nav-arrow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .nav-arrow i {
-            color: var(--light-text);
-            font-size: 1.2rem;
-        }
-        
-        .nav-arrow:hover {
-            background: rgba(0, 169, 255, 0.2);
-            transform: scale(1.1);
-        }
-        
-        .main-game-display {
-            flex: 0 0 400px;
-            height: 300px;
-            position: relative;
-            border: 3px solid #2a2a4a;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-        
-        .main-game-display:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 30px rgba(0, 169, 255, 0.3);
-        }
-        
-        .game-image-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        
-        .main-game-image {
+        .games-video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            z-index: -2;
+            opacity: 0.6;
         }
         
-        .game-title {
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(5, 5, 30, 0.7), rgba(5, 5, 30, 0.95));
+            z-index: -1;
+        }
+        
+        .games-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 0 0 15px rgba(0, 169, 255, 0.7);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--neon-blue), transparent);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+        
+        /* Games Grid Layout */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .game-card {
+            background: rgba(15, 20, 40, 0.6);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 169, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 112, 204, 0.3);
+            border-color: rgba(0, 169, 255, 0.5);
+        }
+        
+        .game-card-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .game-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .game-card:hover .game-card-image img {
+            transform: scale(1.05);
+        }
+        
+        .game-card-image::after {
+            content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 10, 30, 0.8);
-            color: var(--white);
-            padding: 10px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.2rem;
+            height: 70px;
+            background: linear-gradient(to top, rgba(15, 20, 40, 1), transparent);
         }
         
-        .game-info-panel {
-            width: 200px;
-            background: rgba(15, 18, 28, 0.8);
-            border: 2px solid #2a2a4a;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 300px;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .info-header {
-            background: rgba(0, 169, 255, 0.2);
-            color: var(--white);
-            padding: 10px;
-            text-align: center;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .info-content {
-            padding: 15px;
+        .game-card-content {
+            padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
         
-        .info-content p {
+        .game-card-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .game-card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--neon-blue);
+        }
+        
+        .game-card-description {
             color: var(--light-text);
-            margin-bottom: 20px;
             font-size: 0.9rem;
-            line-height: 1.5;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex: 1;
         }
         
-        .play-game-btn {
+        .game-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        
+        .game-tag {
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+            background: rgba(0, 169, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        .play-button {
             background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 25px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            cursor: pointer;
             transition: all 0.3s ease;
-        }
-        
-        .play-game-btn:hover {
-            transform: translateY(-3px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
             box-shadow: 0 5px 15px rgba(0, 169, 255, 0.3);
         }
         
-        .coming-soon {
+        .play-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 169, 255, 0.5);
+        }
+        
+        .play-button i {
+            font-size: 0.9rem;
+        }
+        
+        /* Featured Game Section */
+        .featured-game {
+            background: rgba(10, 15, 35, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(0, 169, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            max-width: 1400px;
+            margin: 0 auto 50px;
+        }
+        
+        .featured-game-header {
+            margin-bottom: 20px;
             position: relative;
-            opacity: 0.7;
-            cursor: default;
         }
         
-        .coming-soon::after {
-            content: '';
+        .featured-label {
             position: absolute;
-            top: 0;
+            top: -50px;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 10, 30, 0.5);
+            background: linear-gradient(135deg, #FF4500, #FF8C00);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 5px 15px;
+            border-radius: 3px 15px 15px 3px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .featured-image {
+            position: relative;
             border-radius: 10px;
-            pointer-events: none;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            height: 300px;
         }
         
-        .coming-soon .mini-game-content i {
-            color: rgba(0, 169, 255, 0.6);
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
         
-        .coming-soon:hover {
-            transform: none;
-            border-color: #2a2a4a;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        .featured-content:hover .featured-image img {
+            transform: scale(1.03);
+        }
+        
+        .featured-info {
+            padding: 20px;
+        }
+        
+        .featured-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0, 169, 255, 0.3);
+        }
+        
+        .featured-description {
+            color: var(--light-text);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .featured-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--neon-blue));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(0, 112, 204, 0.3);
+        }
+        
+        .featured-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 169, 255, 0.5);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-image {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .featured-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .games-container {
+                padding: 30px 15px;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .featured-button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="stars-container"></div>
+
 
     <div id="main-content" class="main-content">
         <header class="ps-header">
@@ -244,65 +375,139 @@
         </header>
 
         <section id="games" class="games-container">
+
             <video class="games-video-bg" autoplay muted loop playsinline>
                 <source src="images/215695_medium.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             
+            <!-- Games Header -->            
             <div class="games-header">
                 <h2 class="section-title">Games Library</h2>
+                <p class="section-subtitle">Explore our collection of space-themed games and embark on cosmic adventures</p>
             </div>
             
-            <div class="games-carousel-container">
-                <div class="games-nav-area left-games">
-                    <div class="mini-game-tile" data-game="asteroid-typer">
-                        <div class="game-label">Current</div>
-                        <div class="mini-game-content">
-                            <i class="fas fa-keyboard"></i>
+            <!-- Featured Game -->
+            <div class="featured-game">
+                <div class="featured-game-header">
+                    <div class="featured-label">Featured Game</div>
+                </div>
+                <div class="featured-content">
+                    <div class="featured-image">
+                        <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/3b9493710e5d96040406814a96ec753ec625bb49_screenshot_20250527_224127_anydesk.jpg" alt="Deep Space Explorer">
+                    </div>
+                    <div class="featured-info">
+                        <h3 class="featured-title">Deep Space Explorer</h3>
+                        <p class="featured-description">Navigate through uncharted regions of space, discover new celestial bodies, and catalog cosmic phenomena in this immersive space exploration game. Use your scanner to identify planets, stars, black holes and other cosmic wonders while managing your ship's fuel supply.</p>
+                        <button class="featured-button" onclick="window.location.href='games/deep-space-explorer/index.html'">
+                            <i class="fas fa-rocket"></i> Play Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="games-grid">
+
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/50e9f551ed7976b19d0e3229bddb319da75fe2d4_screenshot_20250527_224555_anydesk.jpg" alt="Asteroid Belt Dogfight">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Asteroid Belt Dogfight</h3>
+                        <p class="game-card-description">Engage in intense space combat while navigating through dense asteroid fields. Take down enemy fighters and avoid collisions in this action-packed game.</p>
+                        <div class="game-card-footer">
+                            <span class="game-tag">Combat</span>
+                            <button class="play-button" onclick="window.location.href='games/asteroid-belt-dogfight/index.html'">
+                                Play <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="mini-game-tile coming-soon">
-                        <div class="game-label">Coming Soon</div>
-                        <div class="mini-game-content">
-                            <i class="fas fa-rocket"></i>
+                </div>
+                
+
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/3b9493710e5d96040406814a96ec753ec625bb49_screenshot_20250527_224127_anydesk.jpg" alt="Deep Space Explorer">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Deep Space Explorer</h3>
+                        <p class="game-card-description">Navigate through uncharted regions of space, discover new celestial bodies, and catalog cosmic phenomena in this immersive exploration game.</p>
+                        <div class="game-card-footer">
+                            <span class="game-tag">Exploration</span>
+                            <button class="play-button" onclick="window.location.href='games/deep-space-explorer/index.html'">
+                                Play <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
                 
-                <div class="nav-arrow left-arrow">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                
-                <div class="main-game-display">
-                    <div class="game-image-container">
-                        <img src="images/asteroid-typer.jpg" alt="Asteroid Typer" class="main-game-image">
-                        <div class="game-title">Asteroid Typer</div>
+
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/13317d886ebe9d48de479a468a2ee0b45671d059_screenshot_20250527_230933_anydesk.jpg" alt="Asteroid Typer">
                     </div>
-                </div>
-                
-                <div class="game-info-panel">
-                    <div class="info-header">Game Info</div>
-                    <div class="info-content">
-                        <p>Test your typing skills in this space-themed typing game. Type the words to destroy incoming asteroids before they hit your spaceship!</p>
-                        <button class="play-game-btn" onclick="window.location.href='games/asteroid-typer/index.html'">Play Game</button>
-                    </div>
-                </div>
-                
-                <div class="nav-arrow right-arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                
-                <div class="games-nav-area right-games">
-                    <div class="mini-game-tile coming-soon">
-                        <div class="game-label">Coming Soon</div>
-                        <div class="mini-game-content">
-                            <i class="fas fa-chess"></i>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Asteroid Typer</h3>
+                        <p class="game-card-description">Destroy incoming asteroids by typing the words on them before they hit your spaceship! Test your typing speed and accuracy in this educational arcade game.</p>
+                        <div class="game-card-footer">
+                            <span class="game-tag">Typing</span>
+                            <button class="play-button" onclick="window.location.href='games/asteroid-typer/index.html'">
+                                Play <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="mini-game-tile coming-soon">
-                        <div class="game-label">Coming Soon</div>
-                        <div class="mini-game-content">
-                            <i class="fas fa-puzzle-piece"></i>
+                </div>
+                
+
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/9a86d1e0cb413a74532b656836cb9f3ade8c7cf1_image.png" alt="Quantum Drift">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Quantum Drift</h3>
+                        <p class="game-card-description">Race through quantum tunnels at breakneck speeds, manipulating space-time to achieve the fastest lap times in this high-speed racing game.</p>
+                        <div class="game-card-footer">
+                            <span class="game-tag">Racing</span>
+                            <button class="play-button" onclick="window.location.href='games/quantum-drift/index.html'">
+                                Play <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <img src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/0bbc5fe99d1226a808ccdb3667b88a68bfe1f57e_image.png" alt="Solar Surfing">
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Solar Surfing</h3>
+                        <p class="game-card-description">Ride the solar winds and magnetic currents between planets, performing tricks and collecting energy orbs in this unique surfing adventure.</p>
+                        <div class="game-card-footer">
+                            <span class="game-tag">Adventure</span>
+                            <button class="play-button" onclick="window.location.href='games/solar-surfing/index.html'">
+                                Play <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Game 6 - Coming Soon -->
+                <div class="game-card">
+                    <div class="game-card-image">
+                        <div style="background: linear-gradient(45deg, #05051a, #0d0d35); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-rocket" style="font-size: 4rem; color: #00a9ff; text-shadow: 0 0 15px rgba(0, 169, 255, 0.8);"></i>
+                        </div>
+                    </div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">More Games Coming Soon</h3>
+                        <p class="game-card-description">Our team is working on exciting new space-themed games. Stay tuned for new releases and updates to our arcade collection.</p>
+                        <div class="game-card-footer">
+                            <span class="game-tag">Coming Soon</span>
+                            <button class="play-button" disabled style="opacity: 0.6; cursor: not-allowed;">
+                                Wait <i class="fas fa-hourglass-half"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

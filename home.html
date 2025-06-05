@@ -10,6 +10,8 @@
 </head>
 <body>
     <div class="stars-container"></div>
+    
+
     <div id="main-content" class="main-content">
         <header class="ps-header">
             <div class="logo">
@@ -32,6 +34,7 @@
                 <i class="fas fa-bars"></i>
             </div>
         </header>
+
         <section class="hero-space">
             <div class="hero-content">
                 <h2>Welcome to Space Arcade</h2>
@@ -39,6 +42,7 @@
                 <a href="#games" class="btn btn-primary">Play Now</a>
             </div>
         </section>
+
         <section class="welcome-section">
             <div class="container">
                 <div class="welcome-content">
@@ -46,19 +50,46 @@
                     <div class="welcome-grid">
                         <div class="welcome-card" onclick="window.location.href='games.html'">
                             <div class="card-icon">
+                                <i class="fas fa-gamepad"></i>
                             </div>
                             <h3>Games Library</h3>
                             <p>Explore our collection of space-themed games</p>
+                            <div class="card-action">
+                                <span>Browse Games</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
                         </div>
+                        
                         <div class="welcome-card" onclick="window.location.href='about.html'">
+                            <div class="card-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <h3>About Us</h3>
+                            <p>Learn more about Space Arcade and our mission</p>
+                            <div class="card-action">
+                                <span>Read More</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
                         </div>
+                        
                         <div class="welcome-card" onclick="window.location.href='settings.html'">
+                            <div class="card-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <h3>Settings</h3>
+                            <p>Customize your Space Arcade experience</p>
+                            <div class="card-action">
+                                <span>Adjust Settings</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <!-- Footer removed as requested -->
     </div>
+
     <script src="particles.min.js"></script>
     <script src="script.js"></script>
 </body>

@@ -1,6 +1,6 @@
-# Space Arcade Website
+# Nature Arcade Website
 
-Modular Space Aracde game
+A beautiful nature-themed arcade website for hosting web-based games. This platform is designed to showcase games with a nature theme.
 
 ## File Structure
 
@@ -12,6 +12,16 @@ Modular Space Aracde game
   - Game thumbnails
   - Background images
   - Other visual assets
+
+## Features
+
+- Responsive design that works on mobile, tablet, and desktop
+- Nature-inspired color scheme and design elements
+- Game showcase section for featuring games
+- About section to describe the website's purpose
+- Contact form for visitors to get in touch
+- Animated particle background
+- Smooth scroll and animations
 
 ## How to Add a New Game
 
@@ -50,3 +60,10 @@ You can customize various aspects of the website:
 - Add more sections or features as needed
 - Modify the particle effect parameters in `script.js`
 
+## Browser Compatibility
+
+This website is compatible with:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)

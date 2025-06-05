@@ -1,6 +1,6 @@
-/* Space Arcade - Main Stylesheet */
+
 :root {
-    /* PS4/PS5-inspired space color palette */
+
     --primary-blue: #0070cc;
     --bright-blue: #00a9ff;
     --dark-blue: #003c71;
@@ -20,7 +20,7 @@
     --success: #43a047;
     --error: #e53935;
     
-    /* Typography */
+
     --heading-font: 'Rajdhani', sans-serif;
     --body-font: 'Exo 2', sans-serif;
 }

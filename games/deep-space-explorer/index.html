@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Space Explorer - Space Arcade</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <!-- Game UI -->
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-info">
+                <h1>Deep Space Explorer</h1>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">Distance:</span>
+                        <span id="distance">0</span> LY
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Discoveries:</span>
+                        <span id="discoveries">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Fuel:</span>
+                        <span id="fuel">100</span>%
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Game Canvas -->
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- Game Overlay Elements -->
+            <div id="gameStartScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Deep Space Explorer</h2>
+                    <p>Navigate through uncharted regions of space, discover new celestial bodies, and catalog cosmic phenomena!</p>
+                    <button id="startGameBtn" class="game-button">Begin Expedition</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Expedition Ended</h2>
+                    <p>Distance traveled: <span id="finalDistance">0</span> LY</p>
+                    <p>Celestial bodies discovered: <span id="finalDiscoveries">0</span></p>
+                    <button id="restartGameBtn" class="game-button">New Expedition</button>
+                </div>
+            </div>
+            
+            <div id="discoveryScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>New Discovery!</h2>
+                    <p>You've discovered: <span id="discoveryName">Unknown Object</span></p>
+                    <p id="discoveryDescription">Analyzing...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Control Area -->
+        <div class="control-area">
+            <div class="controls-panel">
+                <div class="control-group">
+                    <button id="scanBtn" class="control-btn" disabled>
+                        <i class="fas fa-search"></i> Scan Area
+                    </button>
+                    <button id="boostBtn" class="control-btn" disabled>
+                        <i class="fas fa-rocket"></i> Boost
+                    </button>
+                </div>
+                <div class="scanner-display">
+                    <div id="scanner" class="scanner-screen">
+                        <div class="scanner-line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Controls -->
+        <div class="game-controls">
+            <button id="pauseBtn" class="control-btn">
+                <i class="fas fa-pause"></i> Pause
+            </button>
+            <button id="muteBtn" class="control-btn">
+                <i class="fas fa-volume-up"></i> Sound
+            </button>
+            <button id="helpBtn" class="control-btn">
+                <i class="fas fa-question-circle"></i> Help
+            </button>
+        </div>
+    </div>
+    
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>How to Play Deep Space Explorer</h2>
+            <ul>
+                <li>Use arrow keys to navigate your spacecraft through deep space</li>
+                <li>Scan areas to discover celestial bodies and phenomena</li>
+                <li>Each discovery increases your score</li>
+                <li>Manage your fuel wisely - scanning and boosting consume fuel</li>
+                <li>Refuel by passing close to certain celestial objects</li>
+                <li>The expedition ends when you run out of fuel</li>
+            </ul>
+            <h3>Controls</h3>
+            <ul>
+                <li><strong>Arrow Keys</strong>: Navigate your spacecraft</li>
+                <li><strong>Space</strong>: Activate scanner</li>
+                <li><strong>Shift</strong>: Boost speed (uses more fuel)</li>
+                <li><strong>ESC</strong>: Pause the game</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
