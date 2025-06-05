@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Alignment - Space Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-title">
+                <h1>Quantum Alignment</h1>
+            </div>
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-atom"></i>
+                    <span id="levelDisplay">Level: 1</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-sync-alt"></i>
+                    <span id="movesDisplay">Moves: 0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span id="timeDisplay">Time: 0s</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="helpBtn" class="game-button">
+                    <i class="fas fa-question"></i>
+                </button>
+                <button id="muteBtn" class="game-button">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="pauseBtn" class="game-button">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <div class="controls">
+                <div class="quantum-controls">
+                    <button id="rotateLeft" class="quantum-btn">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button id="swapParticles" class="quantum-btn">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    <button id="rotateRight" class="quantum-btn">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Quantum Alignment</h2>
+                    <p>Manipulate subatomic particles according to quantum mechanics principles to create stable energy patterns.</p>
+                    <p>Rotate particles and change their quantum states to align them correctly.</p>
+                    <button id="startBtn" class="game-button">Start Game</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Game Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume Game</button>
+                    <button id="restartBtn" class="game-button">Restart Level</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <p>Welcome to Quantum Alignment!</p>
+                    <ul>
+                        <li>Rotate particles using the left and right controls</li>
+                        <li>Swap particle states using the middle button</li>
+                        <li>Create stable configurations by aligning particles with matching quantum states</li>
+                        <li>Complete all alignments to progress to the next level</li>
+                        <li>Each level introduces new particle types and alignment rules</li>
+                    </ul>
+                    <button id="closeHelpBtn" class="game-button">Close</button>
+                </div>
+            </div>
+            
+            <div id="levelCompleteScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Level Complete!</h2>
+                    <div class="level-stats">
+                        <p>Level: <span id="levelCompleteLevel">1</span></p>
+                        <p>Moves: <span id="levelCompleteMoves">0</span></p>
+                        <p>Time: <span id="levelCompleteTime">0s</span></p>
+                    </div>
+                    <button id="nextLevelBtn" class="game-button">Next Level</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Quantum Collapse!</h2>
+                    <p>Your particles have destabilized and caused a quantum collapse.</p>
+                    <div class="final-stats">
+                        <p>Final Level: <span id="finalLevel">1</span></p>
+                        <p>Total Moves: <span id="finalMoves">0</span></p>
+                        <p>Total Time: <span id="finalTime">0s</span></p>
+                    </div>
+                    <button id="restartGameBtn" class="game-button">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

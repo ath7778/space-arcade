@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Station Meltdown - Space Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-title">
+                <h1>Space Station Meltdown</h1>
+            </div>
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-heartbeat"></i>
+                    <span id="oxygenDisplay">Oxygen: 100%</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-tools"></i>
+                    <span id="repairsDisplay">Repairs: 0/5</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span id="timeDisplay">Time: 0s</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="helpBtn" class="game-button">
+                    <i class="fas fa-question"></i>
+                </button>
+                <button id="muteBtn" class="game-button">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="pauseBtn" class="game-button">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <div class="controls">
+                <div class="directional-controls hidden">
+                    <button id="upBtn" class="direction-btn">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <div class="middle-controls">
+                        <button id="leftBtn" class="direction-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button id="actionBtn" class="action-btn">
+                            <i class="fas fa-wrench"></i>
+                        </button>
+                        <button id="rightBtn" class="direction-btn">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <button id="downBtn" class="direction-btn">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Space Station Meltdown</h2>
+                    <p>Your space station's reactor core is overheating and multiple systems are failing!</p>
+                    <p>Repair critical systems before your oxygen runs out and save your crew from certain doom.</p>
+                    <button id="startBtn" class="game-button">Start Mission</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume Mission</button>
+                    <button id="restartBtn" class="game-button">Restart Mission</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <p>Welcome to Space Station Meltdown!</p>
+                    <ul>
+                        <li>Use WASD or arrow keys to navigate through the station</li>
+                        <li>Press SPACE or the repair button to fix broken systems</li>
+                        <li>Find and repair all 5 critical systems before your oxygen runs out</li>
+                        <li>Oxygen levels drop faster the longer systems remain damaged</li>
+                        <li>Some doors may be locked - find the keycard to access them</li>
+                    </ul>
+                    <button id="closeHelpBtn" class="game-button">Close</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Failed</h2>
+                    <p>You ran out of oxygen before completing the critical repairs!</p>
+                    <div class="final-stats">
+                        <p>Systems Repaired: <span id="finalRepairs">0/5</span></p>
+                        <p>Oxygen Remaining: <span id="finalOxygen">0%</span></p>
+                        <p>Survival Time: <span id="finalTime">0s</span></p>
+                    </div>
+                    <button id="restartGameBtn" class="game-button">Try Again</button>
+                </div>
+            </div>
+            
+            <div id="missionCompleteScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Complete!</h2>
+                    <p>You successfully repaired all critical systems and saved the station!</p>
+                    <div class="final-stats">
+                        <p>Oxygen Remaining: <span id="successOxygen">0%</span></p>
+                        <p>Completion Time: <span id="successTime">0s</span></p>
+                    </div>
+                    <button id="nextMissionBtn" class="game-button">Next Mission</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

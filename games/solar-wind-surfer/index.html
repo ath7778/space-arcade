@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Wind Surfer - Space Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-title">
+                <h1>Solar Wind Surfer</h1>
+            </div>
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span id="scoreDisplay">Score: 0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-bolt"></i>
+                    <span id="speedDisplay">Speed: 0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span id="timeDisplay">Time: 0s</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="helpBtn" class="game-button">
+                    <i class="fas fa-question"></i>
+                </button>
+                <button id="muteBtn" class="game-button">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="pauseBtn" class="game-button">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Solar Wind Surfer</h2>
+                    <p>Ride the solar winds through dangerous space obstacles and collect energy boosts to increase your speed.</p>
+                    <p>Use your surfboard to navigate through solar radiation and reach maximum velocity!</p>
+                    <button id="startBtn" class="game-button">Start Game</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Game Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume Game</button>
+                    <button id="restartBtn" class="game-button">Restart Game</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <p>Welcome to Solar Wind Surfer!</p>
+                    <ul>
+                        <li>Use UP and DOWN arrow keys or touch controls to move your surfer</li>
+                        <li>Collect solar energy particles (yellow) to increase your speed</li>
+                        <li>Avoid space debris and solar flares</li>
+                        <li>Ride radiation streams for speed boosts</li>
+                        <li>Your score increases with distance traveled and speed</li>
+                    </ul>
+                    <button id="closeHelpBtn" class="game-button">Close</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Game Over</h2>
+                    <p>Your surfboard couldn't handle the intense solar radiation!</p>
+                    <div class="final-stats">
+                        <p>Final Score: <span id="finalScore">0</span></p>
+                        <p>Max Speed: <span id="finalSpeed">0</span></p>
+                        <p>Distance: <span id="finalDistance">0</span> km</p>
+                        <p>Survival Time: <span id="finalTime">0s</span></p>
+                    </div>
+                    <button id="restartGameBtn" class="game-button">Play Again</button>
+                </div>
+            </div>
+            
+            <div class="mobile-controls hidden">
+                <button id="upButton" class="control-btn">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+                <button id="downButton" class="control-btn">
+                    <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
