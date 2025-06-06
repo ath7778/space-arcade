@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Navigator - Space Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-title">
+                <h1>Nebula Navigator</h1>
+            </div>
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-hourglass-half"></i>
+                    <span id="timeDisplay">Time: 00:00</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-bolt"></i>
+                    <span id="movesDisplay">Moves: 0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-trophy"></i>
+                    <span id="levelDisplay">Level: 1</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="helpBtn" class="game-button">
+                    <i class="fas fa-question"></i>
+                </button>
+                <button id="muteBtn" class="game-button">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="pauseBtn" class="game-button">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <div id="gameBoard" class="game-board"></div>
+            
+            <div class="action-panel">
+                <button id="undoBtn" class="action-button">
+                    <i class="fas fa-undo"></i> Undo
+                </button>
+                <button id="resetBtn" class="action-button">
+                    <i class="fas fa-sync"></i> Reset
+                </button>
+                <button id="hintBtn" class="action-button">
+                    <i class="fas fa-lightbulb"></i> Hint
+                </button>
+            </div>
+            
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Nebula Navigator</h2>
+                    <p>Navigate through complex nebula mazes to reach cosmic beacons!</p>
+                    <p>Guide your ship through shifting nebulae by rotating maze segments. Each level introduces new mechanics and challenges.</p>
+                    <button id="startBtn" class="game-button">Start Navigation</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Navigation Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume Navigation</button>
+                    <button id="restartBtn" class="game-button">Restart Level</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Complete!</h2>
+                    <p>You've successfully navigated all known nebulae!</p>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Time:</span>
+                            <span id="finalTime">00:00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Moves:</span>
+                            <span id="finalMoves">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Levels Completed:</span>
+                            <span id="finalLevels">0</span>
+                        </div>
+                    </div>
+                    <button id="restartGameBtn" class="game-button">Play Again</button>
+                </div>
+            </div>
+            
+            <div id="levelCompleteScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Nebula Cleared!</h2>
+                    <p>You've successfully navigated through this sector.</p>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">Time Taken:</span>
+                            <span id="levelTime">00:00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Moves Used:</span>
+                            <span id="levelMoves">0</span>
+                        </div>
+                        <div class="star-rating">
+                            <i class="far fa-star" id="star1"></i>
+                            <i class="far fa-star" id="star2"></i>
+                            <i class="far fa-star" id="star3"></i>
+                        </div>
+                    </div>
+                    <button id="nextLevelBtn" class="game-button">Next Level</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <p>Welcome to Nebula Navigator!</p>
+                    <ul>
+                        <li>Guide your ship through the nebula maze to reach the beacon</li>
+                        <li>Click on maze segments to rotate them and create a clear path</li>
+                        <li>Your ship can only travel along connected pathways</li>
+                        <li>Complete each level with the fewest moves possible to earn stars</li>
+                        <li>Watch out for special tiles with unique properties:</li>
+                    </ul>
+                    <div class="tile-examples">
+                        <div class="tile-example">
+                            <div class="example-tile ship-tile"></div>
+                            <span>Your Ship</span>
+                        </div>
+                        <div class="tile-example">
+                            <div class="example-tile beacon-tile"></div>
+                            <span>Beacon (Goal)</span>
+                        </div>
+                        <div class="tile-example">
+                            <div class="example-tile locked-tile"></div>
+                            <span>Locked Segment</span>
+                        </div>
+                        <div class="tile-example">
+                            <div class="example-tile teleport-tile"></div>
+                            <span>Teleporter</span>
+                        </div>
+                    </div>
+                    <button id="closeHelpBtn" class="game-button">Got It</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

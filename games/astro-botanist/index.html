@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Botanist - Space Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-title">
+                <h1>Astro Botanist</h1>
+            </div>
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-seedling"></i>
+                    <span id="plantsDisplay">Plants: 0/0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-tint"></i>
+                    <span id="waterDisplay">Water: 100%</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-flask"></i>
+                    <span id="nutrientsDisplay">Nutrients: 100%</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="helpBtn" class="game-button">
+                    <i class="fas fa-question"></i>
+                </button>
+                <button id="muteBtn" class="game-button">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="pauseBtn" class="game-button">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <div id="gardenGrid" class="garden-grid"></div>
+            
+            <div class="inventory-panel">
+                <h3>Resources</h3>
+                <div class="resource-items">
+                    <div class="resource-item" data-type="water">
+                        <i class="fas fa-tint"></i>
+                        <span>Water</span>
+                    </div>
+                    <div class="resource-item" data-type="nutrients">
+                        <i class="fas fa-flask"></i>
+                        <span>Nutrients</span>
+                    </div>
+                </div>
+                
+                <h3>Seeds</h3>
+                <div class="seed-items">
+                    <div class="seed-item" data-type="lumina">
+                        <div class="seed-icon lumina-seed"></div>
+                        <span>Lumina</span>
+                    </div>
+                    <div class="seed-item" data-type="voidbloom">
+                        <div class="seed-icon voidbloom-seed"></div>
+                        <span>Voidbloom</span>
+                    </div>
+                    <div class="seed-item" data-type="stellaris">
+                        <div class="seed-icon stellaris-seed"></div>
+                        <span>Stellaris</span>
+                    </div>
+                    <div class="seed-item locked" data-type="chronosprout">
+                        <div class="seed-icon chronosprout-seed"></div>
+                        <span>Chronosprout</span>
+                    </div>
+                </div>
+                
+                <div class="tool-panel">
+                    <h3>Tools</h3>
+                    <div class="tool-items">
+                        <div class="tool-item selected" data-tool="plant">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="tool-item" data-tool="water">
+                            <i class="fas fa-fill-drip"></i>
+                        </div>
+                        <div class="tool-item" data-tool="fertilize">
+                            <i class="fas fa-prescription-bottle"></i>
+                        </div>
+                        <div class="tool-item" data-tool="harvest">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Astro Botanist</h2>
+                    <p>Cultivate alien plants in your zero-gravity garden!</p>
+                    <p>Each plant species requires different care and produces unique resources that help sustain your garden. Monitor your water and nutrient levels carefully.</p>
+                    <button id="startBtn" class="game-button">Start Gardening</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Garden Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume Gardening</button>
+                    <button id="restartBtn" class="game-button">Restart Garden</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Garden Withered</h2>
+                    <p>Your plants have all died due to neglect.</p>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">Plants Grown:</span>
+                            <span id="finalPlantsGrown">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Resources Harvested:</span>
+                            <span id="finalResourcesHarvested">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Days Survived:</span>
+                            <span id="finalDaysSurvived">0</span>
+                        </div>
+                    </div>
+                    <button id="restartGameBtn" class="game-button">Try Again</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <p>Welcome to Astro Botanist!</p>
+                    <ul>
+                        <li>Click on an empty plot and select a seed type to plant</li>
+                        <li>Different plants need different amounts of water and nutrients</li>
+                        <li>Use the water tool to water thirsty plants</li>
+                        <li>Use the fertilizer tool to add nutrients to hungry plants</li>
+                        <li>Harvest mature plants to gather resources</li>
+                        <li>Maintain your garden's overall health to unlock new plant species</li>
+                    </ul>
+                    <h3>Plant Types:</h3>
+                    <ul>
+                        <li><strong>Lumina:</strong> Glows in the dark, needs minimal water</li>
+                        <li><strong>Voidbloom:</strong> Absorbs radiation, requires frequent watering</li>
+                        <li><strong>Stellaris:</strong> Produces oxygen, needs balanced care</li>
+                        <li><strong>Chronosprout:</strong> Manipulates time, very demanding (unlock by growing 5 plants)</li>
+                    </ul>
+                    <button id="closeHelpBtn" class="game-button">Got It</button>
+                </div>
+            </div>
+            
+            <div id="dayCompleteScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Day Complete!</h2>
+                    <p>Your garden has survived another cycle.</p>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">Healthy Plants:</span>
+                            <span id="dayHealthyPlants">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Resources Gained:</span>
+                            <span id="dayResourcesGained">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">New Seeds Unlocked:</span>
+                            <span id="dayNewSeeds">None</span>
+                        </div>
+                    </div>
+                    <button id="nextDayBtn" class="game-button">Next Day</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>

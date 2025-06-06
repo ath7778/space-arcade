@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interstellar Trader - Space Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-title">
+                <h1>Interstellar Trader</h1>
+            </div>
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-coins"></i>
+                    <span id="creditsDisplay">Credits: 10,000</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-rocket"></i>
+                    <span id="shipDisplay">Ship: Scout</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-gas-pump"></i>
+                    <span id="fuelDisplay">Fuel: 100%</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="helpBtn" class="game-button">
+                    <i class="fas fa-question"></i>
+                </button>
+                <button id="muteBtn" class="game-button">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="pauseBtn" class="game-button">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <div class="game-main">
+                <div class="star-map" id="starMap">
+                    <div class="current-location-indicator" id="currentLocationIndicator"></div>
+                </div>
+                
+                <div class="planet-info" id="planetInfo">
+                    <div class="planet-header">
+                        <h2 id="planetName">Select a Planet</h2>
+                        <div class="planet-image" id="planetImage"></div>
+                    </div>
+                    
+                    <div class="planet-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Type:</span>
+                            <span class="detail-value" id="planetType">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Economy:</span>
+                            <span class="detail-value" id="planetEconomy">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Distance:</span>
+                            <span class="detail-value" id="planetDistance">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Fuel Cost:</span>
+                            <span class="detail-value" id="travelCost">-</span>
+                        </div>
+                    </div>
+                    
+                    <button id="travelBtn" class="action-button" disabled>
+                        <i class="fas fa-rocket"></i> Travel
+                    </button>
+                </div>
+            </div>
+            
+            <div class="market-panel hidden" id="marketPanel">
+                <div class="market-header">
+                    <h2>Market: <span id="marketPlanetName">Planet Name</span></h2>
+                    <button id="closeMarketBtn" class="close-button">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="market-tabs">
+                    <button class="tab-button active" data-tab="buy">Buy Resources</button>
+                    <button class="tab-button" data-tab="sell">Sell Resources</button>
+                    <button class="tab-button" data-tab="shipyard">Shipyard</button>
+                </div>
+                
+                <div class="tab-content" id="buyTab">
+                    <div class="resources-list" id="buyResourcesList"></div>
+                </div>
+                
+                <div class="tab-content hidden" id="sellTab">
+                    <div class="cargo-info">
+                        <span class="cargo-label">Cargo Space:</span>
+                        <span class="cargo-value" id="cargoSpace">0/100</span>
+                    </div>
+                    <div class="resources-list" id="sellResourcesList"></div>
+                </div>
+                
+                <div class="tab-content hidden" id="shipyardTab">
+                    <div class="ships-list" id="shipsList"></div>
+                </div>
+            </div>
+            
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Interstellar Trader</h2>
+                    <p>Buy low, sell high, and navigate the galactic markets!</p>
+                    <p>Each planet has unique resources and market conditions. Upgrade your ship, manage your cargo space, and become the wealthiest trader in the galaxy!</p>
+                    <button id="startBtn" class="game-button">Begin Trading</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Trading Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume Trading</button>
+                    <button id="restartBtn" class="game-button">New Game</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Trading Empire Complete!</h2>
+                    <p>You've become a legendary galactic trader!</p>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">Final Wealth:</span>
+                            <span id="finalCredits">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Best Ship:</span>
+                            <span id="finalShip">Scout</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Trade Reputation:</span>
+                            <span id="tradeRank">Novice</span>
+                        </div>
+                    </div>
+                    <button id="newGameBtn" class="game-button">Start New Empire</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <p>Welcome to Interstellar Trader!</p>
+                    <ul>
+                        <li>Click on planets in the star map to view information about them</li>
+                        <li>Travel to planets by clicking the Travel button (requires fuel)</li>
+                        <li>Buy resources at low prices and sell them at planets where they're in demand</li>
+                        <li>Each planet has unique economic conditions that affect prices</li>
+                        <li>Upgrade your ship to increase cargo capacity and fuel efficiency</li>
+                        <li>Watch out for market fluctuations and rare opportunities!</li>
+                    </ul>
+                    <h3>Economy Types:</h3>
+                    <ul>
+                        <li><strong>Industrial:</strong> High demand for minerals, low prices on technology</li>
+                        <li><strong>Agricultural:</strong> High demand for technology, low prices on food</li>
+                        <li><strong>Mining:</strong> High demand for technology, low prices on minerals</li>
+                        <li><strong>High-Tech:</strong> High demand for minerals and food, low prices on technology</li>
+                        <li><strong>Tourist:</strong> High demand for luxury goods and food</li>
+                    </ul>
+                    <button id="closeHelpBtn" class="game-button">Got It</button>
+                </div>
+            </div>
+            
+            <div id="transactionModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2 id="transactionTitle">Buy Resource</h2>
+                    <div class="transaction-details">
+                        <div class="resource-image" id="transactionResourceImage"></div>
+                        <div class="transaction-info">
+                            <div class="info-item">
+                                <span class="info-label">Resource:</span>
+                                <span class="info-value" id="transactionResourceName">Resource Name</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Price:</span>
+                                <span class="info-value" id="transactionPrice">0 credits</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Available:</span>
+                                <span class="info-value" id="transactionAvailable">0 units</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-controls">
+                        <div class="quantity-control">
+                            <button id="decreaseQty" class="qty-button">-</button>
+                            <input type="number" id="transactionQty" min="1" value="1">
+                            <button id="increaseQty" class="qty-button">+</button>
+                        </div>
+                        <div class="total-cost">
+                            <span>Total: </span>
+                            <span id="transactionTotal">0 credits</span>
+                        </div>
+                    </div>
+                    
+                    <div class="transaction-buttons">
+                        <button id="confirmTransactionBtn" class="game-button">Confirm</button>
+                        <button id="cancelTransactionBtn" class="game-button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="messageModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2 id="messageTitle">Message</h2>
+                    <p id="messageContent">Message content goes here.</p>
+                    <button id="closeMessageBtn" class="game-button">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
