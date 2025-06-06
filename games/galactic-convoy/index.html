@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Convoy - Space Arcade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-container"></div>
+    
+    <div class="game-container">
+        <header class="game-header">
+            <div class="back-button" onclick="window.location.href='../../games.html'">
+                <i class="fas fa-arrow-left"></i> Back to Games
+            </div>
+            <div class="game-title">
+                <h1>Galactic Convoy</h1>
+            </div>
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-shield-alt"></i>
+                    <span id="shieldsDisplay">Shields: 100%</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-meteor"></i>
+                    <span id="convoyDisplay">Convoy: 5/5</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-chart-line"></i>
+                    <span id="scoreDisplay">Score: 0</span>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="helpBtn" class="game-button">
+                    <i class="fas fa-question"></i>
+                </button>
+                <button id="muteBtn" class="game-button">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="pauseBtn" class="game-button">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <div class="controls">
+                <div class="directional-controls hidden">
+                    <button id="upBtn" class="direction-btn">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <div class="middle-controls">
+                        <button id="leftBtn" class="direction-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button id="actionBtn" class="action-btn">
+                            <i class="fas fa-bolt"></i>
+                        </button>
+                        <button id="rightBtn" class="direction-btn">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <button id="downBtn" class="direction-btn">
+                        <i class="fas fa-arrow-down"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="startScreen" class="game-overlay">
+                <div class="overlay-content">
+                    <h2>Galactic Convoy</h2>
+                    <p>A vital fleet of supply ships needs your protection!</p>
+                    <p>Navigate through dangerous asteroid fields and defend against enemy attacks as you escort your convoy to safety.</p>
+                    <button id="startBtn" class="game-button">Start Mission</button>
+                </div>
+            </div>
+            
+            <div id="pauseScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Paused</h2>
+                    <button id="resumeBtn" class="game-button">Resume Mission</button>
+                    <button id="restartBtn" class="game-button">Restart Mission</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Failed</h2>
+                    <p>Your convoy has been destroyed.</p>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">Final Score:</span>
+                            <span id="finalScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ships Remaining:</span>
+                            <span id="finalConvoy">0/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Distance Traveled:</span>
+                            <span id="finalDistance">0 ly</span>
+                        </div>
+                    </div>
+                    <button id="restartGameBtn" class="game-button">Try Again</button>
+                </div>
+            </div>
+            
+            <div id="missionCompleteScreen" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>Mission Accomplished!</h2>
+                    <p>You've successfully escorted the convoy to safety!</p>
+                    <div class="stats-summary">
+                        <div class="stat-item">
+                            <span class="stat-label">Final Score:</span>
+                            <span id="successScore">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ships Saved:</span>
+                            <span id="successConvoy">0/5</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Shields Remaining:</span>
+                            <span id="successShields">0%</span>
+                        </div>
+                    </div>
+                    <button id="nextMissionBtn" class="game-button">New Mission</button>
+                </div>
+            </div>
+            
+            <div id="helpModal" class="game-overlay hidden">
+                <div class="overlay-content">
+                    <h2>How to Play</h2>
+                    <p>Welcome to Galactic Convoy!</p>
+                    <ul>
+                        <li>Use WASD or arrow keys to navigate your ship</li>
+                        <li>Press SPACE or the action button to fire weapons</li>
+                        <li>Protect your convoy ships from asteroids and enemy attacks</li>
+                        <li>The mission is successful when you reach the destination</li>
+                        <li>If all convoy ships are destroyed, the mission fails</li>
+                    </ul>
+                    <button id="closeHelpBtn" class="game-button">Got It</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
